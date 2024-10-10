@@ -1,4 +1,5 @@
 # стартовое окно, запрашивающее порт
+from urllib.parse import uses_query
 
 import customtkinter
 import threading
@@ -17,11 +18,19 @@ class StartWindow(customtkinter.CTk):
         self.start_button = customtkinter.CTkButton(self, text='начать', command=self.__start)
         self.start_button.pack(pady = 10) # кнопка старта
 
+        self.use_grabber = customtkinter.CTkCheckBox(self, text='граббер')
+        self.use_grabber.pack(pady=(0,10))
+
     def run(self):
         self.mainloop()
 
     def __start(self): # действия, которые выполняет кнопка старт
         port = str(self.set_port.get())
-        self.port_callback(port)
+        grab = None
+        if self.use_grabber.get():
+            grab = 1
+        else:
+            grab = 0
+        self.port_callback(port, grab)
 
 
