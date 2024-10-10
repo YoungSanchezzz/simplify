@@ -1,13 +1,22 @@
-import customtkinter
+# точка входа программы
 
-class App(customtkinter.CTk):
+from start_window import StartWindow
+
+class Main:
     def __init__(self):
-        super().__init__()
-        self.title('blue boat')
-        self.geometry('400x600')
+
+        self.port = None # порт программы
+
+        # вызов окна для ввода порта
+        self.start_window = StartWindow(self.entered_port)
+        self.start_window.run()
+        print(self.port)
 
 
 
-app = App()
-app.mainloop()
+    def entered_port(self, port): # функция получения порта
+        self.port = port
 
+
+
+app = Main()
