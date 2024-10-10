@@ -20,7 +20,7 @@ class Main:
         self.port = port
         callback = DataReader(port).check()
         if callback:
-            self.start_window.destroy()
+            self.start_window.quit()
         else:
             pass
 
