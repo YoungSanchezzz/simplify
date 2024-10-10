@@ -12,3 +12,6 @@ class MainWindow(customtkinter.CTk):
 
     def run(self):
         self.mainloop()
+
+    def print(self):
+        print('иди нахуй')

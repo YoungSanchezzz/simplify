@@ -13,6 +13,8 @@ class Main:
         self.start_window = StartWindow(self.port_check)
         self.start_window.run()
 
+        self.main_window.print()
+
 
 
     def port_check(self, port, grab): # функция получения порта
