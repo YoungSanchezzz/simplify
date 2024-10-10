@@ -21,7 +21,7 @@ class StartWindow(customtkinter.CTk):
         self.mainloop()
 
     def __start(self): # действия, которые выполняет кнопка старт
-        port = int(self.set_port.get())
+        port = str(self.set_port.get())
         self.port_callback(port)
-        self.destroy()
+
 

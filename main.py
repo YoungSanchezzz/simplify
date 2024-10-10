@@ -1,6 +1,7 @@
 # точка входа программы
 
 from start_window import StartWindow
+from data_reader import DataReader
 
 class Main:
     def __init__(self):
@@ -8,14 +9,23 @@ class Main:
         self.port = None # порт программы
 
         # вызов окна для ввода порта
-        self.start_window = StartWindow(self.entered_port)
+        self.start_window = StartWindow(self.port_check)
         self.start_window.run()
-        print(self.port)
 
 
 
-    def entered_port(self, port): # функция получения порта
+
+
+
+
+    def port_check(self, port): # функция получения порта
         self.port = port
+        callback = DataReader(port).check()
+        if callback:
+            self.start_window.destroy()
+        else:
+            pass
+
 
 
 
