@@ -9,3 +9,6 @@ class MainWindow(customtkinter.CTk):
         self.geometry('400x600')
         customtkinter.set_appearance_mode('dark')
         customtkinter.set_default_color_theme('blue')
+
+    def run(self):
+        self.mainloop()

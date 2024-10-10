@@ -14,6 +14,7 @@ class Main:
 
         # вызов основного окна
         self.main_window = MainWindow()
+        self.main_window.run()
 
     def port_check(self, port): # функция получения порта
         self.port = port
