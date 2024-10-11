@@ -1,19 +1,18 @@
-# модуль чтения данных с порта
+# модуль, отвечающий за чтение с порта
 
 import serial
-import threading
-import time
+import serial.tools.list_ports
 
 class DataReader:
     def __init__(self, port):
-        self.port = port # порт, введённый пользователем
+        self.port = port
         self.baudrate = 115200
 
-    def check(self):
-        try:
-            self.ser = serial.Serial(self.port, self.baudrate)
-            print('порт открыт')
-            return 1
-        except Exception as e:
-            print(f"Произошла ошибка: {e}")
-            return 0
+    def check(self, port):
+        available_ports = [port.device for port in serial.tools.list_ports.comports()]
+        return port in available_ports
+
+test = DataReader('COM4')
+a = test.check('COM7')
+print(a)
+
