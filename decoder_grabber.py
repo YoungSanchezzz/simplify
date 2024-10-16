@@ -1,12 +1,13 @@
-# модуль программы, описывающий декодирование пакета nmea
+# модуль декодера для граббера
 import math
 
 
-class Decoder:
-    def __init__(self, packet):
+class DecoderGrabber:
+    def __init__(self, packet, use_grabber):
 
         self.packet = packet # пришедший пакет
         self.pgn = self.packet.pgn
+        self.use_grabber = use_grabber
 
         # передающиеся данные
         '''
@@ -47,6 +48,11 @@ class Decoder:
 
 
     def __converter(self, group): # конвертация в hex
+        if not self.use_grabber:
+            group = [format(int(value), 'X') for value in group]
+            for i in range(len(group)):
+                if len(group[i]) == 1:
+                    group[i] = '0' + group[i]
         reverse_str = group[::-1]  # little endian
         combined_str = ''.join(reverse_str)  # Собираем все значения массива в одну строку
         decimal_value = int(combined_str, 16)  # Переводим из HEX в decimal
