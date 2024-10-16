@@ -44,6 +44,7 @@ class Main:
                 self.decoded_data = Decoder(self.packet, self.use_grabber)  # здесь лежит значение, которое надо отобразить
             else:
                 self.packet = Packet(self.response, self.use_grabber)  # здесь у нас лежит pgn и value
+                print(self.packet.pgn)
                 # проверка, откуда получаем данные (из граббера или с платы)
                 self.decoded_data = Decoder(self.packet, self.use_grabber)  # здесь лежит значение, которое надо отобразить
                 # print('PGN:', self.packet.pgn, 'значение:', self.packet.value, 'сырье:', self.response)

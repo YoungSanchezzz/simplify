@@ -25,11 +25,17 @@ class Decoder:
         '''
         self.sid, self.cog, self.sog = None, None, None
 
+        '''
+        пакет FD06 передает:
+        water_t - температура воды
+        '''
+        self.water_t = None
+
 
         match self.pgn:
             case 'F801': self.latitude, self.longitude = self.f801(self.packet.value)
             case 'F802': self.sid, self.cog, self.sog = self.f802(self.packet.value)
-
+            case 'FD06': self.water_t = self.fd06(self.packet.value)
 
 
     def f801(self, input_value):
@@ -45,6 +51,12 @@ class Decoder:
         cog = float(str(cog * 10 ** -4 * (180/math.pi))[:6])
         sog= float(str(sog * 10 ** -2 *3.6)[:6])
         return sid, cog, sog
+
+    def fd06(self, input_value): # температура воды
+        group = input_value[1:3]
+        water_t = float(str(self.__converter(group) * 10 **-2)[:6])
+        water_t = float(str(float(water_t) - 273.15)[:6])
+        return water_t
 
 
     def __converter(self, group): # конвертация в hex
