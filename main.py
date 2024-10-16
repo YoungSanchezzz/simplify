@@ -6,7 +6,7 @@ from start_window import StartWindow
 from data_reader import DataReader
 from main_window import MainWindow
 from nmea_packet import Packet
-from decoder_grabber import DecoderGrabber
+from decoder import Decoder
 
 class Main:
     def __init__(self):
@@ -41,11 +41,11 @@ class Main:
                 if len(self.response[0]) != 9:
                     continue
                 self.packet = Packet(self.response, self.use_grabber)
-                self.decoded_data = DecoderGrabber(self.packet, self.use_grabber)  # здесь лежит значение, которое надо отобразить
+                self.decoded_data = Decoder(self.packet, self.use_grabber)  # здесь лежит значение, которое надо отобразить
             else:
                 self.packet = Packet(self.response, self.use_grabber)  # здесь у нас лежит pgn и value
                 # проверка, откуда получаем данные (из граббера или с платы)
-                self.decoded_data = DecoderGrabber(self.packet)  # здесь лежит значение, которое надо отобразить
+                self.decoded_data = Decoder(self.packet, self.use_grabber)  # здесь лежит значение, которое надо отобразить
                 # print('PGN:', self.packet.pgn, 'значение:', self.packet.value, 'сырье:', self.response)
             self.main_window.update(self.decoded_data)
 

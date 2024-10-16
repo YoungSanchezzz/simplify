@@ -2,7 +2,7 @@
 import math
 
 
-class DecoderGrabber:
+class Decoder:
     def __init__(self, packet, use_grabber):
 
         self.packet = packet # пришедший пакет
